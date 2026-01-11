@@ -1,77 +1,11 @@
-[workspace]
-members = ["crates/*"]
-resolver = "3"
-
-[workspace.metadata.cargo-shear]
-# Used by #[facet(derive(Error))] macro in tracey
-ignored = ["facet-error"]
-
-[workspace.package]
-edition = "2024"
+[package]
+name = "_trace"
+version = "0.1.0"
+edition = "2021"
+description = "A language-agnostic requirements tracking tool"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/bearcove/tracey"
-authors = ["Amos Wenger <amos@bearcove.eu>"]
 
-[workspace.dependencies]
-# Internal
-tracey-core = { path = "crates/tracey-core", version = "1.0.0" }
-
-# Facet ecosystem (from git for facet-miette support)
-facet = { git = "https://github.com/facet-rs/facet", branch = "main", version = "0.41.0" }
-facet-args = { git = "https://github.com/facet-rs/facet", branch = "main", version = "0.41.0" }
-facet-kdl = { git = "https://github.com/facet-rs/facet", branch = "main", version = "0.41.0" }
-facet-json = { git = "https://github.com/facet-rs/facet", branch = "main", version = "0.41.0" }
-facet-value = { git = "https://github.com/facet-rs/facet", branch = "main", version = "0.41.0" }
-facet-error = { git = "https://github.com/facet-rs/facet", branch = "main", version = "0.41.0" }
-facet-miette = { git = "https://github.com/facet-rs/facet", branch = "main", version = "0.41.0" }
-
-# Error handling
-eyre = "0.6"
-miette = { version = "7", default-features = false, features = ["fancy-no-backtrace"] }
-
-# HTTP fetching
-ureq = "3"
-
-
-
-# File walking (gitignore-aware)
-ignore = "0.4"
-
-# Parallel processing
-rayon = "1"
-
-
-
-# Pretty output
-owo-colors = "4"
-
-# Syntax highlighting for miette
-miette-arborium = "2"
-
-# Tree-sitter parsing (for reverse traceability)
-# Note: async_tiny was removed - now using axum
-arborium = { version = "2", default-features = false }
-arborium-rust = "2"
-
-# HTTP server for serve command
-axum = { version = "0.8", features = ["ws"] }
-tokio = { version = "1", default-features = false, features = ["rt", "net", "sync", "time", "process", "io-util", "macros"] }
-tower-http = { version = "0.6", features = ["cors"] }
-hyper = { version = "1" }
-hyper-util = { version = "0.1", features = ["client-legacy", "http1"] }
-futures-util = "0.3"
-tokio-tungstenite = "0.28"
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-
-# File watching for live reload
-notify = "8"
-notify-debouncer-mini = "0.7"
-
-# Full-text search
-tantivy = "0.22"
-
-# The profile that 'dist' will build with
-[profile.dist]
-inherits = "release"
-lto = "thin"
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+glob = "0.3"
+regex = "1"

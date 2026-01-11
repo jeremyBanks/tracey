@@ -1,7 +1,0 @@
-{
-  "rules": {
-    "test.rule.one": {"url": "#one"},
-    "test.rule.two": {"url": "#two"},
-    "test.rule.three": {"url": "#three"}
-  }
-}
